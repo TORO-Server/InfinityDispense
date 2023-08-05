@@ -33,16 +33,7 @@ public class Events implements Listener {
         // ブロック状態 取得
         final BlockState blockState = event.getBlock().getState();
 
-        if (CancelledItemStacks.containsKey(blockState)) {
-            //インベントリリセット処理 実行
-
-            final Container container = (Container) blockState;
-
-            // インベントリ リセット
-            // CancelledItemStacks から インベントリのアイテム情報 削除
-            container.getInventory().setContents(CancelledItemStacks.remove(container));
-            return;
-        }
+        if (CancelledItemStacks.containsKey(blockState)) return;
 
         // もし カスタム名前 設定できる ブロックだったら
         if (blockState instanceof Nameable nameable) {
@@ -78,7 +69,10 @@ public class Events implements Listener {
             // ディスペンサー or ドロッパー 起動
             if (ctr instanceof Dispenser dropper) dropper.dispense();
             else if (ctr instanceof Dropper dropper) dropper.drop();
+
+            // コピーしたデータ 削除
+            // インベントリ 復元
+            ctr.getInventory().setContents(CancelledItemStacks.remove(ctr));
         }
     }
-
 }
