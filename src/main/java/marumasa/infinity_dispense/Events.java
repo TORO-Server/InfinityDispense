@@ -35,7 +35,12 @@ public class Events implements Listener {
 
         if (CancelledItemStacks.containsKey(blockState)) {
             //インベントリリセット処理 実行
-            new resetInventory((Container) blockState).runTaskLater(mc, 0L);
+
+            final Container container = (Container) blockState;
+
+            // インベントリ リセット
+            // CancelledItemStacks から インベントリのアイテム情報 削除
+            container.getInventory().setContents(CancelledItemStacks.remove(container));
             return;
         }
 
@@ -76,19 +81,4 @@ public class Events implements Listener {
         }
     }
 
-    // インベントリ リセット
-    private static class resetInventory extends BukkitRunnable {
-        private final Container container;
-
-        public resetInventory(Container container) {
-            this.container = container;
-        }
-
-        @Override
-        public void run() {
-            // インベントリ リセット
-            // CancelledItemStacks から インベントリのアイテム情報 削除
-            container.getInventory().setContents(CancelledItemStacks.remove(container));
-        }
-    }
 }
