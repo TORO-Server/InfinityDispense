@@ -1,0 +1,4 @@
+name: InfinityDispense
+version: '${version}'
+main: marumasa.infinity_dispense.minecraft
+api-version: '1.19'
