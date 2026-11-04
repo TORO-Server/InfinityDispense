@@ -10,10 +10,16 @@ repositories {
     maven {
         name = "spigotmc-repo"
         url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+        content {
+            includeGroup "org.spigotmc"
+        }
     }
     maven {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
+        content {
+            includeGroup "net.md-5"
+        }
     }
 }
 
@@ -32,6 +38,8 @@ java {
 }
 
 tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release = targetJavaVersion
     }
