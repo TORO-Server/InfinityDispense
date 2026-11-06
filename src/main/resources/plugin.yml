@@ -2,3 +2,20 @@ name: InfinityDispense
 version: '${version}'
 main: marumasa.infinity_dispense.minecraft
 api-version: '1.19'
+
+commands:
+  infinitydispense:
+    description: 無限ディスペンサーの登録を管理するコマンド
+    usage: /infinitydispense <mark|unmark|info> [x y z [world]]
+    permission-message: 無限ディスペンサーを管理する権限がありません。
+    permission: infinitydispense.create
+
+permissions:
+  infinitydispense.create:
+    description: 無限ディスペンサーの設置と登録を許可する権限
+    default: op
+    children:
+      infinitydispense.edit: true
+  infinitydispense.edit:
+    description: 無限ディスペンサーの中身の変更を許可する権限
+    default: op

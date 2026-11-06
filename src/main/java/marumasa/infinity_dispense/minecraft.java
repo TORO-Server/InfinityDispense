@@ -7,7 +7,9 @@ public final class minecraft extends JavaPlugin {
     @Override
     public void onEnable() {
         Config config = new Config(this);
-        getServer().getPluginManager().registerEvents(new Events(this, config), this);
+        Marker marker = new Marker(this, config);
+        getServer().getPluginManager().registerEvents(new Events(this, marker), this);
+        getCommand("infinitydispense").setExecutor(new MarkCommand(marker));
     }
 
     @Override
